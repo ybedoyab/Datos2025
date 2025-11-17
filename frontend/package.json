@@ -9,7 +9,9 @@
     "test": "ng test"
   },
   "prettier": {
-    "plugins": ["prettier-plugin-tailwindcss"],
+    "plugins": [
+      "prettier-plugin-tailwindcss"
+    ],
     "printWidth": 100,
     "singleQuote": true,
     "overrides": [
@@ -29,6 +31,7 @@
     "@angular/forms": "^20.3.0",
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
+    "@supabase/supabase-js": "^2.81.1",
     "@tailwindcss/postcss": "^4.1.17",
     "postcss": "^8.5.6",
     "rxjs": "~7.8.0",
