@@ -3,7 +3,8 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'products',
-    loadComponent: () => import('./products/products').then(m => m.Products)
+    loadComponent: () => 
+      import('./features/products/products.component').then(m => m.ProductsComponent)
   },
   {
     path: '',

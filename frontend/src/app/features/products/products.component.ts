@@ -1,27 +1,27 @@
 import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
-import { ProductsService, Product } from '../services/products-service';
+import { ProductsService } from './services/products.service';
+import { Product } from './models/product.model';
 
 @Component({
   selector: 'app-products',
-  imports: [],
-  templateUrl: './products.html',
+  templateUrl: './products.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Products {
-  private productsService = inject(ProductsService);
+export class ProductsComponent {
+  private readonly productsService = inject(ProductsService);
   
-  products = signal<Product[]>([]);
-  loading = signal(true);
-  error = signal<string | null>(null);
+  readonly products = signal<Product[]>([]);
+  readonly loading = signal(true);
+  readonly error = signal<string | null>(null);
 
   constructor() {
     this.loadProducts();
   }
 
-  private async loadProducts() {
+  private async loadProducts(): Promise<void> {
     try {
       this.loading.set(true);
-      const data = await this.productsService.getAllProducts();
+      const data = await this.productsService.getProducts();
       this.products.set(data);
       this.error.set(null);
     } catch (err) {
