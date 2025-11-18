@@ -1,0 +1,27 @@
+<div class="products-container">
+  <h1>Productos</h1>
+
+  @if (loading()) {
+    <p>Cargando productos...</p>
+  }
+
+  @if (error()) {
+    <div class="error">
+      <p>{{ error() }}</p>
+    </div>
+  }
+
+  @if (!loading() && !error()) {
+    <div class="products-list">
+      @for (product of products(); track product.id) {
+        <div class="product-card">
+          <h3>{{ product.nombre }}</h3>
+          <p>ID: {{ product.id }}</p>
+          <p>Creado: {{ product.created_at }}</p>
+        </div>
+      } @empty {
+        <p>No hay productos disponibles</p>
+      }
+    </div>
+  }
+</div>
