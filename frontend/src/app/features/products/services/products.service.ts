@@ -9,17 +9,60 @@ export class ProductsService {
   private readonly tableName = signal('productos');
   private readonly supabase = inject(SupabaseService).client;
 
-  async getProducts(): Promise<Product[]> {
-    const { data, error } = await this.supabase
+  state = signal({
+    products: new Map<number, Product>(),
+    currentPage: 1,
+    totalPages: 1,
+  });
+
+  constructor() {
+    this.getProducts();
+  }
+
+  getFormattedProducts(): Product[] {
+    return Array.from(this.state().products.values());
+  }
+
+  async getProducts(page: number = 1, pageSize: number = 2) {
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
+
+    const { data, error, count } = await this.supabase
       .from(this.tableName())
-      .select('*').range(0,9);
+      .select('*', { count: 'exact' })
+      .range(from, to);
 
     if (error) {
       throw error;
     }
 
-    return data as Product[];
+    const productsMap = new Map<number, Product>();
+    data.forEach((product: Product) => {
+      productsMap.set(product.id, product);
+    });
+
+    this.state.set({
+      products: productsMap,
+      currentPage: page,
+      totalPages: count ? Math.ceil(count / pageSize) : 1,
+    });
   }
+
+  // async getProducts(page: number = 1, pageSize: number = 10): Promise<{ data: Product[]; count: number }> {
+  //     const from = (page - 1) * pageSize;
+  //     const to = from + pageSize - 1;
+
+  //     const { data, error, count } = await this.supabase
+  //       .from(this.tableName())
+  //       .select('*', { count: 'exact' })
+  //       .range(from, to);
+
+  //     if (error) {
+  //       throw error;
+  //     }
+
+  //     return { data: data as Product[], count: count || 0 };
+  //   }
 
   async getProductById(id: number): Promise<Product | null> {
     const { data, error } = await this.supabase
@@ -65,10 +108,7 @@ export class ProductsService {
   }
 
   async deleteProduct(id: number): Promise<void> {
-    const { error } = await this.supabase
-      .from(this.tableName())
-      .delete()
-      .eq('id', id);
+    const { error } = await this.supabase.from(this.tableName()).delete().eq('id', id);
 
     if (error) {
       throw error;

@@ -1,4 +1,4 @@
-import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy, computed } from '@angular/core';
 import { ProductsService } from './services/products.service';
 import { Product } from './models/product.model';
 
@@ -10,24 +10,23 @@ import { Product } from './models/product.model';
 export class ProductsComponent {
   private readonly productsService = inject(ProductsService);
   
-  readonly products = signal<Product[]>([]);
-  readonly loading = signal(true);
-  readonly error = signal<string | null>(null);
+  readonly products = computed(() => this.productsService.getFormattedProducts());
 
-  constructor() {
-    this.loadProducts();
+  currentPage = computed(() => this.productsService.state().currentPage);
+  totalPages = computed(() => this.productsService.state().totalPages);
+
+  nextPage() {
+    const current = this.currentPage();
+    const total = this.totalPages();
+    if (current < total) {
+      this.productsService.getProducts(current + 1);
+    }
   }
 
-  private async loadProducts(): Promise<void> {
-    try {
-      this.loading.set(true);
-      const data = await this.productsService.getProducts();
-      this.products.set(data);
-      this.error.set(null);
-    } catch (err) {
-      this.error.set(err instanceof Error ? err.message : 'Error al cargar productos');
-    } finally {
-      this.loading.set(false);
+  previousPage() {
+    const current = this.currentPage();
+    if (current > 1) {
+      this.productsService.getProducts(current - 1);
     }
   }
 }
