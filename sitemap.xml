@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://ashen-software.github.io/Datos2025/</loc>
+         <lastmod>2025-11-21</lastmod>
+    </url>
+    <url>
+         <loc>https://ashen-software.github.io/Datos2025/api/endpoints/</loc>
+         <lastmod>2025-11-21</lastmod>
+    </url>
+    <url>
+         <loc>https://ashen-software.github.io/Datos2025/arquitectura/implementacion/</loc>
+         <lastmod>2025-11-21</lastmod>
+    </url>
+    <url>
+         <loc>https://ashen-software.github.io/Datos2025/arquitectura/overview/</loc>
+         <lastmod>2025-11-21</lastmod>
+    </url>
+    <url>
+         <loc>https://ashen-software.github.io/Datos2025/database/esquema/</loc>
+         <lastmod>2025-11-21</lastmod>
+    </url>
+</urlset>
