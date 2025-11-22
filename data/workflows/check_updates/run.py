@@ -1,4 +1,4 @@
-from loguru import logger
+from logs_config.logger import app_logger as logger
 from typing import List, Dict
 
 def check_updates_task(current_config: Dict) -> List[str]:
@@ -12,10 +12,10 @@ def check_updates_task(current_config: Dict) -> List[str]:
         return changed
 
     for src in current_config.get("sources", []):
-        # placeholder: implementar chequear (api_timestamp, scrape_text, list_files, checksum)
+        # TODO: implementar chequear (api_timestamp, scrape_text, list_files, checksum)
         src_id = src.get("id")
         logger.info(f"[check_updates] Verificando fuente: {src_id}")
-        # SIMULACIÓN: marcar cambio si el flag `force_change` está presente (solo para testing)
+        # TODO: marcar cambio si el flag `force_change` está presente (solo para testing)
         if src.get("force_change", False):
             changed.append(src_id)
     return changed

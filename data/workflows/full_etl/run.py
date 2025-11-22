@@ -1,4 +1,4 @@
-from loguru import logger
+from logs_config.logger import app_logger as logger
 from typing import List, Dict
 
 def full_etl_task(changed_sources: List[str], current_config: Dict):
@@ -20,11 +20,11 @@ def full_etl_task(changed_sources: List[str], current_config: Dict):
         # Llamar al loader correspondiente: api_loader, scraper_loader, etc.
         typ = src.get("type")
         if typ == "api":
-            from data.extraction.api_clients.api_loader import run_api_loader
+            from extraction.api_clients.api_loader import run_api_loader
             run_api_loader(src)
             logger.info(f"[full_etl] api_loader ejecutado para {src_id}")
         elif typ in ("scrape", "scraper"):
-            from data.extraction.scrapers.scraper_loader import run_scraper_loader
+            from extraction.scrapers.scraper_loader import run_scraper_loader
             run_scraper_loader(src)
             logger.info(f"[full_etl] scraper_loader ejecutado para {src_id}")
         else:

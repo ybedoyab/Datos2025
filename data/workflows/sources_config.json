@@ -3,8 +3,8 @@
   "sources": [
     {
       "id": "api_gas",
-      "name": "API Gas Co",
-      "active": true,
+      "name": "API Gas Colombia",
+      "active": false,
       "type": "api",
       "schedule": { "cron": "* * * * *", "note": "Dev: check each minute" },
       "config": {
@@ -14,17 +14,18 @@
       },
       "check": { "method": "api_field", "url": "https://httpbin.org/json", "field": "slideshow" },
       "storage": { "local_raw_path": "/app/data/raw/api_gas", "file_format": "json" },
-      "force_change": true
+      "force_change": false
     },
     {
       "id": "scrape_example",
       "name": "Scrape Example",
-      "active": true,
+      "active": false,
       "type": "scrape",
-      "schedule": { "cron": "0 0 * * 0", "note": "Weekly on Sunday" },
+      "schedule": { "cron": "*/2 * * * *", "note": "Every 2 minutes" },
       "config": { "url": "https://example.com" },
       "check": { "method": "scrape_text", "selector": "h1" },
-      "storage": { "local_raw_path": "/app/data/raw/scrape_example", "file_format": "html" }
+      "storage": { "local_raw_path": "/app/data/raw/scrape_example", "file_format": "html" },
+      "force_change": false
     }
   ]
 }
