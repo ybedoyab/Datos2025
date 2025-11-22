@@ -30,11 +30,11 @@ Plan de Implementación por Hitos
 
 ### Hito 4: Dashboard
 
-*   Aplicación Angular base
+*   Aplicación React base
     
 *   Visualizaciones principales
     
-*   Despliegue en Vercel/Netlify
+*   Despliegue en DigitalOcean/Coolify
     
 
 ### Hito 5: Monitorización Avanzada
@@ -44,29 +44,3 @@ Plan de Implementación por Hitos
 *   Alertas proactivas
     
 *   Documentación operativa
-    
-
-Plan de desarrollo
---------------------
-### FASE 0 — Prerrequisitos
-
-**Objetivo: dejar listo el entorno.**
-
-Entregables:
-
-- Cuenta Supabase con proyecto.
-
-- Repositorio con estructura base (/proyecto/data/).
-
-- Acceso para subir imágenes Docker (Docker Hub).
-
-- Crear VPS.
-
-Tareas:
-
-- Crear proyecto en Supabase.
-
-- Crear repo y branch de trabajo.
-
-- Raw data en supabase, no persistible.
-

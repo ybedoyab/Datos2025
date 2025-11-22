@@ -1,10 +1,12 @@
-/Datos2025/
+# Directorios
+
+## Proceso ETL
+/Suria/
 │
 ├── data/                        ← ETL
 │   ├── Dockerfile
 │   ├── requirements.txt
 │   ├── scheduler/
-│   │   ├── cron_jobs/           ← Configuración de cron
 │   │   ├── runner.py           ← Ejecuta workflows desde cron
 |   |   └── jobs.py
 │   │
@@ -26,5 +28,3 @@
 │   │
 │   └── services/
 │       └── backend_client.py    ← Comunicación con API del backend
-│
-└── docker-compose.yml           ← Orquestación local
