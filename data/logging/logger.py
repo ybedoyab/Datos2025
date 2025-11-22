@@ -48,5 +48,5 @@ def configure_logger():
     return logger
 
 
-# Instancia global para importar desde otros módulos
+# Instancia global
 app_logger = configure_logger()

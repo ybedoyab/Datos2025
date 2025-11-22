@@ -46,49 +46,27 @@ Plan de Implementación por Hitos
 *   Documentación operativa
     
 
-Estimación de Costos
+Plan de desarrollo
 --------------------
+### FASE 0 — Prerrequisitos
 
-### Capa Gratuita Disponible
+**Objetivo: dejar listo el entorno.**
 
-*   **GitHub Actions**: ~2,000 minutos/mes (suficiente para uso estimado)
-    
-*   **Supabase**: 500MB base de datos + 1GB storage (adecuado para inicio)
-    
-*   **Vercel/Netlify**: Despliegue frontend gratuito
-    
-*   **Slack**: Webhooks gratuitos para alertas
-    
+Entregables:
 
-### Puntos de Escalación Futura
+- Cuenta Supabase con proyecto.
 
-*   Supabase Pro: >500MB de datos o >50k filas/mes
-    
-*   GitHub Actions: >2,000 minutos/mes de procesamiento
-    
-*   Monitorización: Migración a DataDog si requiere analytics avanzados
-    
+- Repositorio con estructura base (/proyecto/data/).
 
-Runbook Operativo
------------------
+- Acceso para subir imágenes Docker (Docker Hub).
 
-### Procedimientos Comunes
+- Crear VPS.
 
-1.  **Ejecución Manual ETL**: Trigger via GitHub UI
-    
-2.  **Debug de Fallos**: Revisión de logs en GitHub Actions + tabla etl\_logs
-    
-3.  **Recuperación de Errores**: Re-ejecución con limpieza opcional de datos corruptos
-    
-4.  **Actualización de Scrapers**: Modificación de selectores ante cambios en fuentes
-    
+Tareas:
 
-### Métricas de Salud
+- Crear proyecto en Supabase.
 
-*   Tiempo de ejecución promedio por fuente
-    
-*   Tasa de éxito de extracción (>95% objetivo)
-    
-*   Latencia datos fuente → dashboard (<24 horas)
-    
-*   Disponibilidad del dashboard (>99.5%)
+- Crear repo y branch de trabajo.
+
+- Raw data en supabase, no persistible.
+

@@ -20,12 +20,12 @@ def full_etl_task(changed_sources: List[str], current_config: Dict):
         # Llamar al loader correspondiente: api_loader, scraper_loader, etc.
         typ = src.get("type")
         if typ == "api":
-            # from extraction.api_clients.api_loader import run as run_api
-            # run_api(src)
-            logger.info(f"[full_etl] (sim) api_loader para {src_id}")
+            from data.extraction.api_clients.api_loader import run_api_loader
+            run_api_loader(src)
+            logger.info(f"[full_etl] api_loader ejecutado para {src_id}")
         elif typ in ("scrape", "scraper"):
-            # from extraction.scrapers.scraper_loader import run as run_scraper
-            # run_scraper(src)
-            logger.info(f"[full_etl] (sim) scraper_loader para {src_id}")
+            from data.extraction.scrapers.scraper_loader import run_scraper_loader
+            run_scraper_loader(src)
+            logger.info(f"[full_etl] scraper_loader ejecutado para {src_id}")
         else:
             logger.warning(f"[full_etl] Tipo no soportado: {typ}")

@@ -1,12 +1,12 @@
 {
   "version": "1.0.0",
-  "schedule": { "cron": "* * * * *", "note": "Dev: check each minute" },
   "sources": [
     {
       "id": "api_gas",
       "name": "API Gas Co",
       "active": true,
       "type": "api",
+      "schedule": { "cron": "* * * * *", "note": "Dev: check each minute" },
       "config": {
         "base_url": "https://httpbin.org/json",
         "params": {},
@@ -21,6 +21,7 @@
       "name": "Scrape Example",
       "active": true,
       "type": "scrape",
+      "schedule": { "cron": "0 0 * * 0", "note": "Weekly on Sunday" },
       "config": { "url": "https://example.com" },
       "check": { "method": "scrape_text", "selector": "h1" },
       "storage": { "local_raw_path": "/app/data/raw/scrape_example", "file_format": "html" }

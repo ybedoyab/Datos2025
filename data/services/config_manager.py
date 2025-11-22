@@ -18,17 +18,22 @@ CONFIG_OBJECT_NAME = os.getenv("CONFIG_OBJECT_NAME", "sources_config.json")
 class ConfigManager:
     def __init__(self):
         if not SUPABASE_URL or not SUPABASE_KEY:
-            raise RuntimeError("Supabase ENV variables missing")
-
-        self.client = create_client(SUPABASE_URL, SUPABASE_KEY)
+            logger.warning("Supabase ENV variables missing - ConfigManager solo funcionará con cache local")
+            self.client = None
+        else:
+            self.client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
         # Ensure cache dir exists
         CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
-    def download_remote_config(self) -> Dict[str, Any]:
+    def download_remote_config(self) -> Dict[str, Any] | None:
         """
         Descarga el config desde Storage y lo devuelve como dict.
         """
+        if not self.client:
+            logger.warning("No hay cliente Supabase configurado - no se puede descargar config remoto")
+            return None
+            
         logger.info("Descargando configuración remota desde Supabase...")
 
         res = self.client.storage.from_(CONFIG_BUCKET).download(CONFIG_OBJECT_NAME)
@@ -58,6 +63,12 @@ class ConfigManager:
         """
         local_config = self.load_local_config()
         remote_config = self.download_remote_config()
+
+        if remote_config is None:
+            logger.info("Usando solo configuración local (sin acceso a Supabase)")
+            if local_config is None:
+                raise RuntimeError("No hay config local ni remoto disponible")
+            return local_config
 
         if local_config != remote_config:
             logger.warning("Detectado cambio en configuración remota.")

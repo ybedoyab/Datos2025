@@ -4,7 +4,7 @@ import os
 from data.logging.logger import app_logger as logger
 from data.scheduler.jobs import register_jobs
 
-ENV = os.getenv("APP_ENV", "local")  # "local" | "prod"
+ENV = os.getenv("ENVIRONMENT", "local")  # "local" | "prod"
 
 
 def start_scheduler():
